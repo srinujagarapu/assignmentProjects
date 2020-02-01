@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            StoreSystemManagement
+        </title>
+        <!-- Load AngularJS -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="js/restApicalls.js"></script>
+        <style>
+            .button {
+                cursor: pointer;
+                color: blue;
+            }
+            td,th{
+                border: 1px solid gray;
+                width: 25%;
+                text-align: left;
+            }
+            table {
+                width: 600px;
+            }
+        </style>
+    <head>
+    <body ng-app="StoreDetailsManagement" ng-controller="StoreDetailsManagementController">
+         <h1>
+           StoreSystemManagement
+        </h1>
+ 
+        <table>
+            <tr>
+               <th>ID </th>
+                <th>Type</th>
+                <th>Store Name</th>
+                <th>Address</th>
+                <th>Address2</th>
+                <th>City</th>
+                <th>State</th>
+                 <th>zip</th>
+                <th>Services</th>
+                <th>Actions</th>
+            </tr>
+ 
+            <tr ng-repeat="store in storeDetails">
+            <td>{{ store.id }}</td>
+                <td>{{ store.type }}</td>
+                <td>{{ store.name }}</td>
+                <td>{{ store.address }} </td>
+                <td> {{ store.address2 }} </td>
+                <td> {{ store.city }} </td>
+                <td>  {{ store.state }} </td>
+                <td> {{ store.zip }}</td>
+               
+                <td>{{ store.hours }}</td>
+                 <td>{{ store.services }}</td>
+                <td><a ng-click="editStore( store )" class="button">Edit</a> | <a ng-click="removeStore( store )" class="button">Remove</a></td>
+            </tr>
+ 
+        </table>
+ 
+        <h2>Add/Edit Employee</h2>
+ 
+        <form ng-submit="submitStore()">
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input type="text" ng-model="form.id" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td><input type="text" ng-model="form.type" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" ng-model="form.name" size="60" /></td>
+                </tr>
+                 <tr>
+                    <td>address</td>
+                    <td><input type="text" ng-model="form.address" size="60" /></td>
+                </tr>
+                 <tr>
+                    <td>address2</td>
+                    <td><input type="text" ng-model="form.address2" size="60" /></td>
+                </tr>
+                 <tr>
+                    <td>city</td>
+                    <td><input type="text" ng-model="form.city" size="60" /></td>
+                </tr>
+                 <tr>
+                    <td>state</td>
+                    <td><input type="text" ng-model="form.state" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>zip</td>
+                    <td><input type="text" ng-model="form.zip" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>Hours</td>
+                    <td><input type="text" ng-model="form.hours" size="60" /></td>
+                </tr>
+                 <tr>
+                    <td>Services</td>
+                    <td><input type="text" ng-model="form.services" size="60" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" /></td>
+                </tr>
+            </table>
+        </form>
+ 
+    </body>
+</html>
