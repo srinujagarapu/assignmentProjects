@@ -44,7 +44,8 @@
                         url : url,
                         data : angular.toJson($scope.form),
                         headers : {
-                            'Content-Type' : 'application/json'
+                            'Content-Type' : 'application/json',
+                            'Authorization' :'Basic c3JpbnU6dGVzdA=='
                         }
                     }).then( _success, _error );
                 };
@@ -53,8 +54,17 @@
                 $scope.removeStore = function(store) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://localhost:8083/details/' + store.id
-                    }).then(_success, _error);
+                        url : 'http://localhost:8083/details/' + store.id,
+                        headers : {
+                            
+                            'Authorization' :'Basic c3JpbnU6dGVzdA=='
+                        }
+                    }).then(function successCallback(response) {
+                    	console.log(response.data);
+                    	 _refreshPageData();
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
                 };
  
                
@@ -76,7 +86,11 @@
                 function _refreshPageData() {
                     $http({
                         method : 'GET',
-                        url : 'http://localhost:8083/details'
+                        url : 'http://localhost:8083/details',
+                        headers : {
+                               
+                                 'Authorization' :'Basic c3JpbnU6dGVzdA=='
+                             }
                     }).then(function successCallback(response) {
                     	console.log(response.data);
                         $scope.storeDetails = response.data;
