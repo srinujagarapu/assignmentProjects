@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -22,6 +24,7 @@ import assignment.StoreRestApp.repository.StoreDetailsRepo;
 @Component
 public class InitialDataLoaderService implements ApplicationRunner {
 	
+	Logger logger=LoggerFactory.getLogger(InitialDataLoaderService.class);
 	@Autowired
 	StoreDetailsRepo storeDetailsDataSource;
 
@@ -29,6 +32,7 @@ public class InitialDataLoaderService implements ApplicationRunner {
 	ResourceLoader resourceLoader;
 	
     public void run(ApplicationArguments args) {
+    	logger.info("start loading test data into DB");
     	 ObjectMapper objectMapper = new ObjectMapper();
 		 try {
 	        //read json file and convert to StoreDetails object
@@ -59,6 +63,8 @@ public class InitialDataLoaderService implements ApplicationRunner {
 	            	}
 	            	entity.setServices(b.toString().substring(0, b.length()-1));
 	            	storeDetailsDataSource.save(entity);
+	            	
+	            	logger.info("Successfully loaded test data into DB");
 					}
 	            	
 	            }
